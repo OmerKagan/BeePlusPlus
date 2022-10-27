@@ -1,0 +1,86 @@
+Language Name: Bee++
+
+G(V, T, P, S)
+
+S = <program>
+
+V = { <program>, <stmt_list>, <stmt>, <if_stmt>, <elif_stmt>, <assign_stmt>, <declaration_stmt>, 
+<decas_stmt> <while_stmt>, <for_stmt>, <comment_stmt>, <connect_stmt>, <send_stmt>, <receive_stmt>, <line>, <lines>, 
+<print_stmt>, <input_stmt>, <fnc_stmt>, <r_fnc_stmt>, <nor_fnc_stmt>, <param_list>, <primitive_fnc_expr>,
+<expr>, <op_expr>, <logic_expr>, <url_expr>, <factor>, <term>,
+<ident_list>, <type_id>, <var_id>, <number>, <int>, <double>, <string>, <char>, <char_expr>, <string_expr>,
+<digit>, <letter>, <symbol> }	
+
+T = {}
+
+
+P(Production Rules):
+
+<program> ::= <stmt_list>
+<stmt_list> ::= <stmt> ; | <stmt> ; <stmt_list>
+<stmt> ::= <if_stmt> | <elif_stmt> | <while_stmt> | <for_stmt> | <assign_stmt> | <declaration_stmt>
+		   | <comment_stmt> | <fnc_stmt> | <connect_stmt> | <send_stmt> | <receive_stmt> 
+		   | <print_stmt> | <input_stmt> 
+<if_stmt> ::= if <logic_expr> { <stmt_list> }
+	  		  | if <logic_expr> { <stmt_list> } else { <stmt_list> }
+	  		  | if <logic_expr> { <stmt_list> } <elif_stmt>
+	  		  | if <logic_expr> { <stmt_list> } <elif_stmt> else { <stmt_list> }			  	
+<elif_stmt> ::= elif <logic_expr> { <stmt_list> }
+				| elif <logic_expr> { <stmt_list> } <elif_stmt>
+<while_stmt> ::= while <logic_expr> { <stmt_list> }
+<for_stmt> ::= for ( <decas_stmt> <logic_expr> <expr> ) { <stmt_list> } 
+			   | for ( <assign_stmt> <logic_expr> <op_expr> ) { <stmt_list> }					
+<assign_stmt> ::= <var_id> = <expr>				  	
+<declaration_stmt> ::= <type_id> <ident_list>	
+<comment_stmt> ::= // <line>
+				   | /- <lines> -/	
+<line> ::= <string> /n	
+<lines> ::= <line>
+			| <line> <lines>	
+<connect_stmt> ::= connect <url_expr>
+<send_stmt> ::= send <int> to <url_expr>
+<receive_stmt> ::= receive <int> from <url_expr>
+<print_stmt> ::= bout <- <expr>
+<input_stmt> ::= bin -> <var_id>			
+<fnc_stmt> ::= <r_fnc_stmt> | <nor_fnc_stmt>
+<r_fnc_stmt> ::= <type_id> <var_id> ( <param_list> ) { <stmt_list> return <var_id> ; }
+<nor_fnc_stmt> ::= void <var_id> ( <param_list> ) { <stmt_list> }
+				   | void <var_id> ( <param_list> ) { <stmt_list> return ; }				
+<param_list> ::= <type_id> <var_id>
+				 | <type_id> <var_id>, <param_list> 	
+<expr> ::= <op_expr> | <logic_expr> | <url_expr> | <primitive_fnc_expr> | <char_expr> | <string_expr>
+<op_expr> ::= <op_expr> + <term>
+			  | <op_expr> - <term>
+			  | <term>			  
+<logic_expr> ::= <var_id> < <var_id>
+			     | <var_id> > <var_id>
+			     | <var_id> == <var_id>
+			     | <var_id> != <var_id>
+			     | <var_id> <= <var_id>
+			     | <var_id> >= <var_id>	
+			     | <logic_expr> and <logic_expr>
+			     | <logic_expr> or <logic_expr>
+			     | ! ( <logic_expr> )
+<url_expr> ::= http:// <string> | https:// <string>
+<primitive_fnc_expr> ::= getHeat() | getHumidity() | getAirPressure() | getAirQuailty() 
+						 | getLight() | getSoundLevel() | getRadiationLevel() | getTime()	
+<term> ::= <term> * <factor>
+		   | <term> / <factor>
+		   | <term> % <factor>
+		   | <factor>
+<factor> ::= <number> | <var_id> | ( <op_expr> ) | <var_id> ( <param_list> )	
+<number> ::= <int> | <double> | - <int> | - <double>
+<ident_list> ::= <var_id> | <var_id> <ident_list>
+<var_id> ::= <letter>
+		     | <var_id> <letter>
+		     | <var_id> <digit>
+<type_id> ::= int | double | char | bool | string | url
+<double> ::= <int> . <int>
+<int> ::= <digit> | <digit> <int>
+<string> ::= <char> | <char> <string>
+<string_expr> ::= " <string> "	
+<char> ::= <letter> | <symbol> | <digit>
+<char_expr> ::= ' <letter> ' | ' <symbol> ' | ' <digit>	' 
+<letter> ::= A | B | C | ... X | Y | Z | a | b | c | ... x | y | z	
+<symbol> ::= ! | " | # | $ | % | & | ' | ( | ) | * | + | - | . | / | : | ; | < | = | > | ? | [ | \ | ] | ^ | _ | { | } | ~	
+<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9

@@ -1,0 +1,13 @@
+int power ( int a , int b ) {
+	int result = 1 ;
+	for ( int i = 0 ; i < b ; i = i + 1 ) {
+		result = result * a ;
+	}
+	return result ; 
+}
+
+int x = 2 ;
+int y = 3 ;
+int result ;
+
+result = power( x , y ) ;

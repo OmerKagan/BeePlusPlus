@@ -1,0 +1,17 @@
+int heat = getHeat( ) ;
+int humidity ;
+url device1 = http://bee.device1 ;
+url device2 = http://bee.device2 ;
+connect device1 ;
+send heat to device1 ;
+receive humidity from device2 ;
+
+if ( humidity / heat >= 3 ) {
+	bout <- "Humidity is high!" ;
+}
+elif ( ( humidity / heat >= 1.65 ) and ( humidity / heat < 3 ) ) {
+	bout <- "Humidity is normal!" ;
+}
+else {
+	bout <- "Humidity is low!" ;
+}

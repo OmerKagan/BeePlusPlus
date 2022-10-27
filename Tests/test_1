@@ -1,0 +1,10 @@
+int counter = 0 ;
+while ( counter <= 15 ) {
+	if ( counter % 2 == 1 ) {
+		bout <- "The number is odd." ;
+	}
+	else {
+		bout <- "The number is even." ;
+	}
+	i = i + 1 ;
+}
